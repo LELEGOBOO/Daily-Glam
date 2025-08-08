@@ -1,1 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shop</title>
+</head>
+<body>
+  <h1>Ürün Listesi</h1>
+  <ul id="product-list"></ul>
 
+  <script>
+    fetch("http://localhost:8080/items")
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById("product-list");
+        data.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = `${item.name} - ${item.price}₺`;
+          list.appendChild(li);
+        });
+      })
+      .catch(err => console.error("API hatası:", err));
+  </script>
+</body>
+</html>
