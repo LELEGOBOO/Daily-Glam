@@ -473,6 +473,30 @@
     </div>
         <p>&copy; 2025 Daily Glam - All Rights Reserved</p>
     </footer>
+    <script>
+  async function loadProducts() {
+    try {
+      const res = await fetch("http://localhost:3000/products"); // Backend API
+      const products = await res.json();
+
+      const container = document.getElementById("products");
+      container.innerHTML = "";
+      products.forEach(p => {
+        container.innerHTML += `
+          <div class="product">
+            <h3>${p.name}</h3>
+            <p>${p.price}₺</p>
+            <img src="${p.image}" alt="${p.name}" />
+          </div>
+        `;
+      });
+    } catch (err) {
+      console.error("Ürünler yüklenirken hata:", err);
+    }
+  }
+
+  loadProducts();
+</script>
 </body>
 </html>
 <script>
